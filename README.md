@@ -1,12 +1,17 @@
 # flavors_project
-tutorial: https://www.youtube.com/watch?v=Vhm1Cv2uPko
+info:
+https://docs.flutter.dev/deployment/flavors
+https://www.youtube.com/watch?v=Vhm1Cv2uPko
+
+intrucciones:
+-sólo copiar y pegar los archivos como se va indicando.
+-cambiando los nombres de los flavors según se necesite o no.
 
 ## configuración inicial
-1- en /lib crear un nuevo archivo 'app.dart'
-2- en /lib crear los archivos main: 'main_development.dart', 'main_production.dart' y 'main_staging.dart'
-3- crear un folder .vscode en la raiz del proyecto
-4- crear el archivo launch.json en el folder anterior (.vscode)
-5- en "android\app\build.gradle":
+1- en /lib crear un nuevo archivo 'main_common.dart'
+2- en /lib/flavors crear los archivos main: 'main_development.dart', 'main_production.dart' y 'main_staging.dart'
+3- crear un folder .vscode en la raiz del proyecto + el archivo launch.json
+4- en "android\app\build.gradle":
     agregar el bloque de código destacaddo "FLAVORS CONFIGURATIONS" (línea 65)
     cambiar línea 48 por: -applicationId "com.example.listsync"-
         para tener en cuenta, ahora con esta config el 'applicationId' va a ser:
@@ -15,10 +20,10 @@ tutorial: https://www.youtube.com/watch?v=Vhm1Cv2uPko
             para development mode : "com.example.flavors_project.dev"
 
 ### sólo para Android
-6- en 'android\app\src\main\AndroidManifest.xml', cambiar en línea 3 por esto -> android:label="@string/app_name"
+5- en 'android\app\src\main\AndroidManifest.xml', cambiar en línea 3 por esto -> android:label="@string/app_name"
 
 ### sólo para iOS (sólo se puede hacer en una mac con xcode)
-7- ver tutorial dede aquí: https://youtu.be/Vhm1Cv2uPko?t=217
+6- ver tutorial desde aquí: https://youtu.be/Vhm1Cv2uPko?t=217
 
 ## agregar iconos diferenciados
 1- crear una carpeta assets/icons en la raiz del proyecto
@@ -38,6 +43,13 @@ tutorial: https://www.youtube.com/watch?v=Vhm1Cv2uPko
 
 ## agregar splash screen diferenciadas
 1- hacerlo con este paquete "flutter_native_splash" y ver documentación
+
+## apuntar a los endpoints del backend según cada hambiente
+1- en /lib/flavors crear el archivo flavor_config.dart
+2- crear la carpeta lib/network y el archivo http_client.dart
+3- configurar aquí el cliente http (suguiero dio + pretty_dio)
+4- va a recibir los valores que mandemos desde 'main_development.dart', 'main_production.dart' y 'main_staging.dart' -> apiUrl
+5- inicializar el cliente http en 'main_common.dart' antes de lanzar la app
 
 ## Firebase setup
 1- https://www.youtube.com/watch?v=Vhm1Cv2uPko
