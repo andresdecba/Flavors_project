@@ -68,20 +68,23 @@ android {
     productFlavors {
         production {
             dimension "default"
-            resValue "string", "app_name", "Flavors App" // <- "Flavors App" nombre que se ve en la app
+            resValue "string", "app_name", "Flavors App"
             applicationIdSuffix ""
         }
         staging {
             dimension "default"
-            resValue "string", "app_name", "Staging Flavors App"
-            applicationIdSuffix ".stg"
+            applicationIdSuffix ".stg" // com.listsync.stg
+            versionNameSuffix "-stg" // 1.0.0-stg
+            resValue "string", "app_name", "Staging Flavors App" // nombre de la app en el escritorio del celu
         }
         development {
             dimension "default"
-            resValue "string", "app_name", "Development Flavors App"
             applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Development Flavors App"
         }
     }
+    // FLAVORS CONFIGURATIONS //
 }
 
 flutter {
