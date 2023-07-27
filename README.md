@@ -7,8 +7,15 @@ intrucciones:
 -sólo copiar y pegar los archivos como se va indicando.
 -cambiando los nombres de los flavors según se necesite o no.
 
+## crear las variables de entorno
+1- instalar el paquete 'flutter_dotenv'
+2- en la raiz del proyecto crear la carpeta 'env' con sus respectivos archivos .env
+    en los archivos .env se debe agregar la informacion correspondiente a cada flavor (enpoints, keys, etc)
+    para saber mas ver la documentacion del paquete (https://pub.dev/packages/flutter_dotenv)
+3- habilitar la carpeta 'env' en el archivo 'pubspec.yaml'
+
 ## configuración inicial
-1- en /lib crear un nuevo archivo 'main_common.dart'
+1- en /lib crear el archivo 'main_common.dart'
 2- en /lib/flavors crear los archivos main: 'main_development.dart', 'main_production.dart' y 'main_staging.dart'
 3- crear un folder .vscode en la raiz del proyecto + el archivo launch.json
 4- en "android\app\build.gradle":
@@ -24,6 +31,13 @@ intrucciones:
 
 ### sólo para iOS (sólo se puede hacer en una mac con xcode)
 6- ver tutorial desde aquí: https://youtu.be/Vhm1Cv2uPko?t=217
+
+## configurar el cliente htttp o dio
+en /lib/network/http_client.dart ver un ejemplo de como hacerlo
+
+## cambiar de flavor
+en la pestaña "run and debug" de VS code (ctrl+shift+D) en la parte superior aparecerá un menú desplegable con los nombres de los flavors,
+simplemente elegir para pasar de un flavor a otro (cerrar la app antes de cambiar).
 
 ## agregar iconos diferenciados
 1- crear una carpeta assets/icons en la raiz del proyecto
@@ -42,14 +56,9 @@ intrucciones:
 6- ver tutorial desde aquí: https://youtu.be/Vhm1Cv2uPko?t=410
 
 ## agregar splash screen diferenciadas
-1- hacerlo con este paquete "flutter_native_splash" y ver documentación
+hacerlo con este paquete "flutter_native_splash" y ver documentación
 
-## apuntar a los endpoints del backend según cada hambiente
-1- en /lib/flavors crear el archivo flavor_config.dart
-2- crear la carpeta lib/network y el archivo http_client.dart
-3- configurar aquí el cliente http (suguiero dio + pretty_dio)
-4- va a recibir los valores que mandemos desde 'main_development.dart', 'main_production.dart' y 'main_staging.dart' -> apiUrl
-5- inicializar el cliente http en 'main_common.dart' antes de lanzar la app
+
 
 ## Firebase setup
 1- https://www.youtube.com/watch?v=Vhm1Cv2uPko

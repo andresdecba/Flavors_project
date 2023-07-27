@@ -1,55 +1,39 @@
-import 'package:flavors_project/flavors/flavor_config.dart';
-import 'package:flavors_project/network/http_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void mainCommon(FlavorConfig config) async {
+void mainCommon(String envFileName) async {
   // here we can make some inicializations
-  CustomHttpClientImpl(flavorConfig: config);
+  await dotenv.load(fileName: envFileName);
 
   // run the app
-  runApp(
-    App(flavor: config),
-  );
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
-  const App({
-    required this.flavor,
-    super.key,
-  });
-
-  final FlavorConfig flavor;
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final CustomHttpClient httpClient = CustomHttpClientImpl(flavorConfig: flavor);
+    // ahora podemos acceder a las variables de entorno como si fuera un mapa
+    String environment = dotenv.env['ENVIRONMENT']!;
+    String baseUrl = dotenv.env['BASE_URL']!;
+    String apiKey = dotenv.env['API_KEY']!;
+
     return MaterialApp(
       title: 'Flutter flavors example',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(flavor.getEnvironment()),
+          title: const Text('Flavors config example'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ElevatedButton(
-                onPressed: () => httpClient.get(),
-                child: const Text('print get'),
-              ),
-              ElevatedButton(
-                onPressed: () => httpClient.post(),
-                child: const Text('print post'),
-              ),
-              ElevatedButton(
-                onPressed: () => httpClient.put(),
-                child: const Text('print put'),
-              ),
-              ElevatedButton(
-                onPressed: () => httpClient.delete(),
-                child: const Text('print delete'),
-              ),
+              Text('CURRENT FLAVOR: $environment'),
+              Text('URL: $baseUrl'),
+              Text('API KEY: $apiKey'),
             ],
           ),
         ),
